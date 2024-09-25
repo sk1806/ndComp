@@ -1,0 +1,69 @@
+   ------------------------------------------------------------------
+  | Welcome to ROOT 6.30/08                        https://root.cern |
+  | (c) 1995-2024, The ROOT Team; conception: R. Brun, F. Rademakers |
+  | Built for linuxx8664gcc on Jul 14 2024, 22:53:16                 |
+  | From tags/v6-30-08@v6-30-08                                      |
+  | With c++ (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0                   |
+  | Try '.help'/'.?', '.demo', '.license', '.credits', '.quit'/'.q'  |
+   ------------------------------------------------------------------
+
+
+Processing geom_inspect.C...
+
+-------------------------------------------------
+Printing details of top voume with GetTopVolume: 
+
+== Volume: World type TGeoVolume positioned 1 times
+*** Shape World: TGeoBBox ***
+    dX =   605.00000
+    dY =  1339.00000
+    dZ =   605.00000
+    origin: x=    0.00000 y=    0.00000 z=    0.00000
+Mixture G4_Galactic    Aeff=1.00794 Zeff=1 rho=1e-25 radlen=5.78371e+26 intlen=3.52779e+26 index=1
+   Element #0 : H  Z=  1.00 A=  1.01 w= 1.000
+-------------------------------------------------
+
+
+
+
+
+
+Inspecting volume: World
+  Shape: TGeoBBox
+*** Shape World: TGeoBBox ***
+    dX =   605.00000
+    dY =  1339.00000
+    dZ =   605.00000
+    origin: x=    0.00000 y=    0.00000 z=    0.00000
+  Material: G4_Galactic
+    Density: 1e-25 g/cm^3
+    A: 1.00794
+    Z: 1
+Number of daughter nodes: 1
+
+
+Processing node: logicDetector0x119bc50
+  Translation: (0, 0, 0)
+  Rotation Matrix: 
+    [1, 0, 0]
+    [0, 6.12323e-17, 1]
+    [0, -1, 6.12323e-17]
+  Global Origin: (0, 0, 0) + (0, 0, 0) = (0, 0, 0)
+  
+Inspecting volume: logicDetector
+    Shape: TGeoTube
+*** Shape logicDetector: TGeoTube ***
+    Rmin =     0.00000
+    Rmax =   600.00000
+    dz   =  1334.00000
+ Bounding box:
+*** Shape logicDetector: TGeoBBox ***
+    dX =   600.00000
+    dY =   600.00000
+    dZ =  1334.00000
+    origin: x=    0.00000 y=    0.00000 z=    0.00000
+    Material: G4_WATER
+      Density: 1 g/cm^3
+      A: 14.3219
+      Z: 7.21671
+  No daughter nodes for volume: logicDetector

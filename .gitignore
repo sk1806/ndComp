@@ -1,0 +1,10 @@
+*.root*
+*.dat*
+*.kin*
+*.pyc
+gridTools/__pycache__/
+gridTools/fromND280Computing/__pycache__/
+__pycache__/
+fromND280Computing/__pycache__/
+*.egg-info/
+nd280Jobs/__pycache__/

@@ -1,0 +1,66 @@
+
+Processing geom_inspect.C...
+
+-------------------------------------------------
+Printing details of top voume with GetTopVolume: 
+
+== Volume: World type TGeoVolume positioned 1 times
+*** TGeoCompositeShape : solidWorld = 
+ Bounding box:
+*** Shape solidWorld: TGeoBBox ***
+    dX =  6050.00000
+    dY = 13390.00000
+    dZ =  6050.00000
+    origin: x=    0.00000 y=    0.00000 z=    0.00000
+Mixture Vacuum    Aeff=1.00794 Zeff=1 rho=1e-25 radlen=5.78371e+26 intlen=3.52752e+26 index=1
+   Element #0 : Vacuum  Z=  1.00 A=  1.01 w= 1.000
+-------------------------------------------------
+
+
+
+
+
+
+Inspecting volume: World
+  Shape: TGeoCompositeShape
+*** TGeoCompositeShape : solidWorld = 
+ Bounding box:
+*** Shape solidWorld: TGeoBBox ***
+    dX =  6050.00000
+    dY = 13390.00000
+    dZ =  6050.00000
+    origin: x=    0.00000 y=    0.00000 z=    0.00000
+  Material: Vacuum
+    Density: 1e-25 g/cm^3
+    A: 1.00794
+    Z: 1
+Number of daughter nodes: 1
+
+
+Processing node: logicDetector_1
+  Translation: (0, 0, 0)
+  Rotation Matrix: 
+    [1, 0, 0]
+    [0, 6.12303e-17, 1]
+    [0, -1, 6.12303e-17]
+  Global Origin: (0, 0, 0) + (0, 0, 0) = (0, 0, 0)
+  
+Inspecting volume: logicDetector
+    Shape: TGeoTubeSeg
+*** Shape solidDetector: TGeoTubeSeg ***
+    Rmin =     0.00000
+    Rmax =  6000.00000
+    dz   = 13340.00000
+    phi1 =     0.00000
+    phi2 =   360.00000
+ Bounding box:
+*** Shape solidDetector: TGeoBBox ***
+    dX =  6000.00000
+    dY =  6000.00000
+    dZ = 13340.00000
+    origin: x=    0.00000 y=    0.00000 z=    0.00000
+    Material: Water
+      Density: 1 g/cm^3
+      A: 14.3337
+      Z: 7.22222
+  No daughter nodes for volume: logicDetector

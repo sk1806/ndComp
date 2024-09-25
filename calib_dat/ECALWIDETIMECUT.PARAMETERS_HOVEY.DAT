@@ -1,0 +1,87 @@
+*********************************************
+ecalRecon Global Parameters
+***************************************************
+        < ecalRecon.Global.UnusedThresh = 0.3 > # Unused hit storage threshold
+                                                # in mip units
+***************************************************
+ecalRecon Energy Fit Parameters
+        < ecalRecon.EMEnergy.ParameterMask = 13 >
+***************************************************
+ecalRecon Cosmic Data Parameters
+***************************************************
+ecalRecon Matching Type
+    < ecalRecon.SelectMatchingType = 4 >   # 1 = Simple
+                                               # 2 = Full
+                                               # 3 = 3D
+                                               # 4 = 3D with Seeding
+***************************************************
+ecalRecon Full Matching Parameters
+    < ecalRecon.Matching.FrontThreshold = 60. > # Front threshold in mm
+    < ecalRecon.Matching.BackThreshold = 83. > # Back threshold in mm
+    < ecalRecon.Matching.MiddleThreshold = 40. > # Middle threshold in mm
+    < ecalRecon.Matching.QRatioThreshold = 3. > # Charge Ratio threshold
+    < ecalRecon.Matching.EigenRatioThreshold = 1.4 > # Eigen Value Ratio threshold
+    < ecalRecon.Matching.FrontHardness = 40. > # Front hardness in mm
+    < ecalRecon.Matching.BackHardness = 40. > # Back hardness in mm
+    < ecalRecon.Matching.MiddleHardness = 40. > # Middle hardness in mm
+    < ecalRecon.Matching.QRatioHardness = 2. > # Charge Ratio hardness
+    < ecalRecon.Matching.EigenRatioHardness = 0.7 > # Eigen Value Ratio hardness
+    < ecalRecon.Matching.QThreshold = 2. > # Charge Threshold
+    < ecalRecon.Matching.QHardness = 5. > # Charge Hardness
+    < ecalRecon.Matching.Likelihood = 0.1 > # Likelihood
+****************************************************
+ecalRecon 3D and Seeded Matching Parameters
+    < ecalRecon.SeededMatching.TimeResolution = 100. > # ECAL-TPC time resolution in ns. Currently very large to account for potential calibration offsets.
+    < ecalRecon.SeededMatching.PositionResolution = 12. > # ECAL-TPC position resolution in cm
+        < ecalRecon.SeededMatching.LikelihoodThreshold = 1e-5 > # Seeded matching likeihood threshold
+        < ecalRecon.3DMatching.LikelihoodThreshold = 1e-5 > # 3D Matching likelihood threshold
+        < ecalRecon.3DMatching.LogNormalSigma = 0.4 > # Charge ratio LogNormal distribution sigma value
+        < ecalRecon.3DMatching.LogNormalTheta = 0. > # Charge ratio LogNormal distribution location value
+        < ecalRecon.3DMatching.LogNormalM = 1.1 > # Charge ratio LogNormal distribution scale value
+        < ecalRecon.3DMatching.AMRMPV = 300.485 > # AMR ratio Landau distribution MPV value
+        < ecalRecon.3DMatching.AMRSigma = 0.320565 > # AMR ratio Landau distribution sigma value
+        < ecalRecon.3DMatching.RematchRemainingHits = 1 > # Whether to rematch unmatch clusters with unclustered hits in other view
+        < ecalRecon.3DMatching.RematchTimingCut = 10. ns > # Timing cut for this rematching, for the hits in the other view
+***************************************************
+ecalRecon Reconstruction Paramaters.
+        < ecalRecon.Clustering.Reconsolidate = 1 > # Whether to reconsolidate clusters after each stage of matching
+        < ecalRecon.BasicClustering.LayerCut = 2 > # How many layer's difference to cut for nearest neighbour clustering
+        < ecalRecon.BasicClustering.BarCut = 1 > # How many bars's difference to cut for nearest neighbour clustering
+        < ecalRecon.BasicClustering.HitMinimum = 3 > # Min number of hits in a cluster
+        < ecalRecon.BasicClustering.NoiseFilterTimeWindow = 200. > # Time window (ns) used for noise filtering. This is the window width:  (start window)|-- width/2 -->(hit)<-- width/2 --|(stop window)
+        < ecalRecon.CombiClustering.TimeCut = 40. >
+        < ecalRecon.CombiClustering.InterceptCut = 80. >
+        < ecalRecon.ExpandClustering.TimeCut = 40. >
+        < ecalRecon.ExpandClustering.WeightCut = 80. >
+    < ecalRecon.EffectiveSpeedofLight   = 125. > # Effect speed of light in bars measured in mm/ns. This is kept seperated from the MC
+    < ecalRecon.EffectiveSpeedofLightMC = 175. > # Effect speed of light in bars measured in mm/ns. This is kept seperated from the data
+    < ecalRecon.TimeDigitization = 2.5 > # The hit time digitisation period in the ecal.
+******************************************************
+ecalRecon Calibration Parameters
+          # RPL 2012/02/15: changed to take into account combination of PDE correction and new attenuation standard point (1m). Net effect is ~18% reduction. MC is re-pinned to data.
+    < ecalRecon.MIPScale = 19.35 > # PEU/per mip/ per cm. Measured by Patrick Masilah To eventually be taken from the database. This is kept seperated from the MC scale.
+    < ecalRecon.MIPScaleMC = 19.35 > # PEU/per mip/ per cm. Measured by Patrick Masilah To eventually be taken from the database. This is kept seperated from the data scale.
+        < ecalRecon.UseDBAtten = 1 > # Default to use DB attenuation constants, set to 0 if no DB access
+******************************************************
+RecPack matcher options
+    < ecalRecon.Matching.Incremental.TestBeamSwitch = 0 > # Testbeam switch
+    < ecalRecon.Matching.Incremental.EcalStandaloneSwitch = 0 > # Ecal standalone switch to run the algorithm on neutral clusters
+        < ecalRecon.Matching.Incremental.Chi2Cut = 30.0 >
+        < ecalRecon.Matching.Incremental.SubsequentChi2Cut = 50.0 >
+        < ecalRecon.Matching.Incremental.MaxModulesToSkip = 1 > # Maximum modules for Kalman Filter to skip before breaking.
+        < ecalRecon.Matching.Incremental.CovarianceFactor = 5 > # Multiplicative factor for covariance matrix of Kalman Filter seed state
+******************************************************
+ecalRecon Pid options
+    < ecalRecon.Pid.DoLikelihoodSwitch = 0 >
+    < ecalRecon.Pid.Likelihood.PdfFile = v0000.0001 >
+******************************************************
+Ecal Algorithm options Turn on/off
+    < ecalRecon.Algorithm.SeedSwitch = 1 >
+    < ecalRecon.Algorithm.MichelSwitch = 1 >
+    < ecalRecon.Algorithm.Pid = 1 >
+    < ecalRecon.Algorithm.Energy = 1 >
+    < ecalRecon.Algorithm.Debug = 0 >
+    < ecalRecon.Algorithm.MatchTPCEcal = 1 >
+    < ecalRecon.Algorithm.SaveAll = 0 >   # If false, only the final output of ecalRecon is saved. If true, all algorithm results are saved (for debugging only)
+******************************************************
+

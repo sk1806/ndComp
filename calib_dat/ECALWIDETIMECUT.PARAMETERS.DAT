@@ -1,0 +1,288 @@
+*********************************************
+/////////////////////////////////////////////
+*********************************************
+Global CALIBRATION PARAMETERS
+*********************************************
+/////////////////////////////////////////////
+*********************************************
+
+        Switches to determine which sub-detectors to calibrate (for real and simulated data).
+
+	< eventCalib.RunTpcCalib     = 0 >
+	< eventCalib.RunFgdCalib     = 0 >
+	< eventCalib.RunEcalCalib    = 1 >
+	< eventCalib.RunP0DCalib     = 1 >
+	< eventCalib.RunSmrdCalib    = 0 >
+	< eventCalib.RunIngridCalib  = 0 >
+
+        Switches to determine which sub-detectors to calibrate (for simulated data only!).
+
+        < eventCalib.RunTpcCalibForMC      = 1 >
+        < eventCalib.RunFgdCalibForMC      = 1 >
+        < eventCalib.RunEcalCalibForMC     = 1 >
+        < eventCalib.RunP0DCalibForMC      = 1 >
+        < eventCalib.RunSmrdCalibForMC     = 1 >
+        < eventCalib.RunIngridCalibForMC   = 1 >
+
+        For real data you only need to worry about the first set of flags;
+        for simulated data both the first and second set of flags must be true
+        in order for sub-detector to be calibrated.
+
+
+        This is the inverse fraction of events for which we want
+        to save digits; ie, if SaveDigitIFraction is 100,
+        then we will save the digits for 1 in 100 events.
+        < eventCalib.SaveDigitIFraction = 100 >
+
+*********************************************
+/////////////////////////////////////////////
+*********************************************
+TRIPt CALIBRATION PARAMETERS
+*********************************************
+/////////////////////////////////////////////
+*********************************************
+
+	Thresholds on the output charge. Only hits exceeding the threshold are written out
+	< eventCalib.OutputThrshold.Ecal   = 5.5 >
+	< eventCalib.OutputThrshold.P0D    = 0.0 >
+	< eventCalib.OutputThrshold.Smrd   = 0.0 >
+	< eventCalib.OutputThrshold.Ingrid = 0.0 >
+
+
+
+*********************************************
+/////////////////////////////////////////////
+*********************************************
+TPC *ONLY* CALIBRATION PARAMETERS
+*********************************************
+/////////////////////////////////////////////
+*********************************************
+
+*********************************************
+TPC calibration general
+*********************************************
+
+	< eventCalib.UseWaveForm = 1 >  Turn on/off WaveForm use
+
+------------------
+Select which equalization/correction methods to activate
+------------------
+	< eventCalib.GainCalibration = 1 >
+
+	< eventCalib.SelectGainEqualMethod = 1 > 	0 : TestBench only
+					 	1 : Neutrino events (relative)
+					 	2 : Laser (relative)
+					 	3 : None
+
+	< eventCalib.SelectPadEqualization = 1 > 	  : TestBench only
+
+	< eventCalib.SelectElecEqualization = 1 > 	  : From Jerome
+
+-----------------
+The charge read by the electronics is devided by the MM gain
+and converted into number of electrons. This is then the number of
+electrons arriving to the mesh.
+A default value is used, equal to the mean measured gain at the
+CERN TestBench for TPC0/RP0/MM0, corrected to "NewSTP":
+T == 293K, P == 1013mbar
+-----------------
+
+	< eventCalib.DefaultMMGain = 1847.56 >
+
+-----------------
+The mean ADC/DAC value for all FEC card from Jerome's calibration files.
+-----------------
+
+     	< eventCalib.DefaultADCToDacUnit = 6.4  >
+
+
+-----------------
+The MM gain can be corrected for pressure/temperature variations :
+
+g = g0 + (T/p - T0/p0)*slope
+
+g0 is the unknown gain at Tokai, g is the gain at "NewSTP"
+T is the current temperature near the pad, p the current pressure and
+slope is the conversion factor.
+We assume g as a function of T/p is rising *linearly* in our region of interest.
+The slope comes from the monitoring chamber data (J.Steinmann, RWTH, Aaachen)
+The pressure correction can then be obtained from the density correction
+-----------------
+
+	< eventCalib.DensityCorrection = 1 >
+	< eventCalib.DensityCorrectiondedx = 1 >
+	< eventCalib.DensityCorrectionSlope = 27500 >
+	< eventCalib.StandardTemperature = 293.15 >  //Kelvin
+	< eventCalib.StandardPressure = 1013.25 >     //mbar
+
+-----------------
+Added on 01.11.2013 by Y.Petrov
+Offset for TPC timing calibration to shift X coordinate back to the origin
+Based on the study of X coordinate distribution for cosmic tracks after the
+calibration constants for runs 2,3 and 4 were applied to the data.
+This offset takes into account 270 ns offset that is set in the tpcRecon parameter file:
+4363 = 4093 (from the X coord distributions) + 270. This number then needs to be changed if
+the offset in tpcRecon changes
+-------------------
+	< eventCalib.TPCAbsoluteTimeOffset = 4363 > ns
+
+
+-----------------
+Global Timing Corrections
+-----------------
+
+        < eventCalib.GlobalTimingCorrection = 1 >     Turn on/off global time correction from ODB
+        < eventCalib.ManualTimeOffsetCorrection = 0 > Turn on/off manual time correction
+        < eventCalib.ManualTimeOffset = 2420 >        Correction in ns
+
+        < eventCalib.AfterTfbCorrectionData = 520.0 ns >  Empirical AFTER-TFB timing correction.
+
+      elecSim.TRIPT.SpillOffset = 2420 ns    spill w.r.t. first cycle.
+      elecSim.TRIPT.TFBStartClockOffset = 260. ns
+
+        < eventCalib.AfterTfbCorrectionMC = -2680.0 ns >  AFTER-TFB timing correction for MC.
+	                                              Should be equal to the sum of the 2
+						      above constants. Need to keep an eye
+						      on them in elecSim.parameters!
+
+        < eventCalib.FibreDecayConstant = 12.2 >   Unit ns. Used for correction of fibre timewalk for ECAL and P0D.
+
+
+
+-----------------
+Some conditions for the hit to be saved (to remove noise)
+-----------------
+
+	< eventCalib.ThresholdCharge = 10 >
+	< eventCalib.ThresholdPeakCharge = 5 >    Only for wave form mode
+	< eventCalib.MaxNumberTimeBins = 511 >   Only for wave form mode
+	< eventCalib.MinTimeBin = 0 >
+	< eventCalib.MaxTimeBin = 511 >
+
+
+-----------------
+Some features of the After electronics
+-----------------
+
+	< eventCalib.AfterTPC.NTimeBins = 511 >
+     	< eventCalib.AfterTPC.SamplingTime = 40.0 ns >
+     	< eventCalib.AfterTPC.ShapingTime = 200.0 ns >
+
+*********************************************
+TPC Pedestals
+*********************************************
+
+	< eventCalib.Pedestals.MeanPedestal = 250 >
+
+*********************************************
+TPC files
+*********************************************
+
+	< eventCalib.MMMappingFile      =   tpc_mm_mapping.dat >
+	< eventCalib.ElecMappingFile    =   FECSerialPositionMap.dat >
+	< eventCalib.DCCFEMMappingFile  =   tpc_dcc_fem_mapping.dat >
+	< eventCalib.UseDBforMap	     =   1 >
+	< eventCalib.UseDBtoEqualize    =   1 >
+
+
+
+****************************************************
+Switches not in use anymore, kept here provisionally
+(Reading them has been de-activated)
+****************************************************
+	 eventCalib.GainEqualization = 1
+	 eventCalib.ElecCalibration = 1
+
+
+
+************************************************************************
+TFB Charge calibration methods
+0 = use database constants (default)
+1 = use dummy instead of DB constants
+(dummy will be a no-op if that makes sense)
+
+    < tfbApplyCalib.DummyPedestalCalib = 0 >
+    < tfbApplyCalib.DummyCIPolyCalib = 0 >
+
+
+************************************************************************
+TFB Photon calibration methods
+0 = use database constants (default)
+1 = use dummy instead of DB constants
+(dummy may be no-op if that makes sense)
+
+    < tfbApplyCalib.DummyMPPCGainCalib = 0 >
+    < tfbApplyCalib.DummyMPPCLinCalib = 0 >
+    < tfbApplyCalib.DummyBarEndCalib = 1 >
+    < tfbApplyCalib.DummyFiberScaleCalib = 1 >
+
+
+************************************************************************
+TFB Time calibration methods
+1 = include calibration method in chain
+0 = do not include method in the chain
+
+    < tfbApplyCalib.TriggerOffset = 1 >       //1 for data
+    < tfbApplyCalib.RMMSlipCorrection = 1 >   //1 for data
+    < tfbApplyCalib.ChannelAlignment = 0 >        //1 for data
+    < tfbApplyCalib.FEBAlignment = 0 >        //1 for data
+    < tfbApplyCalib.RMMAlignment = 0 >        //1 for data
+    < tfbApplyCalib.SCMAlignment = 0 >        //1 for data
+    < tfbApplyCalib.ElxTimewalkCalib = 1 >    //1 for data
+    < tfbApplyCalib.FiberTimewalkCalib = 1 >    //1 for data
+
+************************************************************************
+Timewalk corection parameter.  This is some combination of the fluor
+decay time and transit time of green photons in the WLS fibre. Unit is ns
+
+    < tfbApplyCalib.FiberDecayConstant = 12.2 >
+    //ICL test bench with 2m fibre ++ mppc afterpulsing
+
+
+************************************************************************
+Good charge definitions
+These are the start/end time bucket veto parameters. all are in ns
+    < tfbApplyCalib.goodCharge.bucketOffset_run1 = 128 >
+    < tfbApplyCalib.goodCharge.bucketOffset_run2a = 80 >
+    < tfbApplyCalib.goodCharge.bucketOffset = 45 > //Anything later than 2a
+    < tfbApplyCalib.goodCharge.bucketSpacing = 232 >
+    < tfbApplyCalib.goodCharge.startCut = 0 >  //68
+    < tfbApplyCalib.goodCharge.endCut = 28 >    //28
+
+************************************************************************
+Timing offsets for each detector in MC
+These are in ns and are *added* to the hit times
+
+    < tfbApplyCalib.SCMOffsetMC.P0D = 0.0 >
+    < tfbApplyCalib.SCMOffsetMC.DSECAL = 0.0 >
+    < tfbApplyCalib.SCMOffsetMC.TECAL = 0.0 >
+    < tfbApplyCalib.SCMOffsetMC.PECAL = 0.0 >
+    < tfbApplyCalib.SCMOffsetMC.SMRD = 0.0 >
+
+************************************************************************
+Default pedestal parameters (in ADC) used for MC calibration by
+TPedestalDummyMethod (they must be consistent with the TRIPT.Pedestal
+parameters in elecSim!)
+
+    < tfbApplyCalib.DummyPedestal = 161.3 >
+    < tfbApplyCalib.DummyPedestal.ingrid = 170.0 >
+    < tfbApplyCalib.DummyPedestalRMS = 1.5 >
+
+
+************************************************************************
+Default gain parameters (in ADC) used for MC gain calibration by
+TMPPCGainDummyMethod (they must be consistent with the TRIPT.PeToADC
+parameters in elecSim!). The same parameters are used by the FallBack()
+methods in TMPPCGainDriftCalibMethod and TSimpleMPPCGainMethod.
+
+    < tfbApplyCalib.DummyMPPCGain.p0d = 10.8 >
+    < tfbApplyCalib.DummyMPPCGain.ecal = 14.0 >
+    < tfbApplyCalib.DummyMPPCGain.mrd = 11.3 >
+    < tfbApplyCalib.DummyMPPCGain.ingrid = 10.0 >
+
+
+************************************************************************
+CERN test beam configuration options
+
+    < tfbApplyCalib.TestBeamMode = 0 >
+    < tfbApplyCalib.CERNMetaDataFileName = parameters/fullLog_including_logbook.root >
